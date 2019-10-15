@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import { Redirect } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
     const [user, setUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
     const updateUser = (e) =>{
@@ -19,16 +19,16 @@ const Login = () => {
       .then(res => {
         console.log("this.props.history.push('/friends');")
         localStorage.setItem('token', res.data.payload);
-        this.props.history.push('/friends');
+        props.history.push('/friends');
       })
       .catch(err => console.log(err.response));
       console.log('he')
       setLoggedIn(true)
     }
-    useEffect(()=>{
-        console.log('it rendered')
+    // useEffect(()=>{
+    //     console.log('it rendered')
         
-    },[loggedIn])
+    // },[loggedIn])
 
     if (localStorage.getItem("token")) {
         return <Redirect to="Friends" />;

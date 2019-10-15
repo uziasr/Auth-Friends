@@ -10,9 +10,13 @@ function App() {
   return (
     <Router>
       <div className="App">
+        {/* <div>
+          <Link to='/login'>login</Link>
+          <Link to='/friends'>friends</Link>          
+        </div> */}
         <Switch>
         <PrivateRoute path="/friends" component={Friends} />
-          <Route path='/' exact component={Login}/>
+          <Route path='/' component={Login}/>
           <Route component={Login}/>
         </Switch>
       </div>
