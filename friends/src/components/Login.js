@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 
 const Login = () => {
     const [user, setUser] = useState({})
+    const [loggedIn, setLoggedIn] = useState(false)
     const updateUser = (e) =>{
         setUser({
             ...user,
@@ -21,8 +22,13 @@ const Login = () => {
         this.props.history.push('/friends');
       })
       .catch(err => console.log(err.response));
+      console.log('he')
+      setLoggedIn(true)
     }
-
+    useEffect(()=>{
+        console.log('it rendered')
+        
+    },[loggedIn])
 
     if (localStorage.getItem("token")) {
         return <Redirect to="Friends" />;
