@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import { Redirect } from "react-router-dom";
 
 const Login = () => {
     const [user, setUser] = useState({})
@@ -15,13 +16,17 @@ const Login = () => {
         axiosWithAuth()
       .post('/api/login', user)
       .then(res => {
-          console.log(res)
+        console.log("this.props.history.push('/friends');")
         localStorage.setItem('token', res.data.payload);
-        this.props.history.push('/protected');
+        this.props.history.push('/friends');
       })
       .catch(err => console.log(err.response));
     }
 
+
+    if (localStorage.getItem("token")) {
+        return <Redirect to="Friends" />;
+    }
     return (
         <form onSubmit={login}>
             <input name='username' type='text' placeholder='username' onChange={updateUser}></input>
