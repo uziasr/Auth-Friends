@@ -22,10 +22,6 @@ export const AddFriend = (props)=>{
         .catch(err=>console.log('error',err.response))
     }
 
-    useEffect(()=>{
-        console.log('friend added!!')
-    },[])
-
     return (
         <form onSubmit={addFriend}>
             <input name='name' type='text' placeholder='name' onChange={updateFriend}></input>

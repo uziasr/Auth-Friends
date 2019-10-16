@@ -27,12 +27,11 @@ button{
 `
 
 const Friends = (props) => {
-    console.log('this is props', props)
     const [updated, setUpdate] = useState(false)
     const [friend, setFriend] = useState({})
     const [friends, setFriends] = useState([])
 
-    console.log(props)
+    
     useEffect(() => {
         // fetch data from the server
         // the data is protected behind a token
@@ -47,19 +46,19 @@ const Friends = (props) => {
     
       const delFriend = (friend)=>{
         //   e.preventDefault()
-           console.log(friend)
+           
            axiosWithAuth()
           .delete(`/api/friends/${friend.id}`)
-          .then(res => {console.log(res)
+          .then(res => {
             setUpdate(true)
         })
-          .catch(err => console.log(err.response)); 
+          .catch(err => console.log(err.response));
+          
+          setFriends(friends.filter(Friend=>friend.id!==Friend.id))
            
       }
 
-
-
-      console.log('friends,', friends)
+      
     return(
         <div>
             <AddFriend setFriend={setFriend} friend={friend}/>
