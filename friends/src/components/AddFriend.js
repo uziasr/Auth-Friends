@@ -1,20 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 export const AddFriend = (props)=>{
     const [friend, setFriend] = useState({})
+    const [friendAdded, setFriendAdded] = useState(false)
+    const [friends, setFriends] = useState([])
     const updateFriend = (e) =>{
         setFriend({
             ...friend,
             [e.target.name]:e.target.value
         })
     }
-    const addFriend = () => {
+    const addFriend = (e) => {
         axiosWithAuth()
         .post('/api/friends', friend)
-        .then(res=>console.log(res))
-        .error(err=>console.log(err.response))
+        .then(res=>{
+            console.log('addded',res)
+            setFriendAdded(!friendAdded)
+            setFriends([...friends,friend])
+        })
+        .catch(err=>console.log('error',err.response))
     }
+
+    useEffect(()=>{
+        console.log('friend added!!')
+    },[])
 
     return (
         <form onSubmit={addFriend}>

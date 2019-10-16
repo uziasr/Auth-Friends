@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login'
@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute'
 import Friends from './components/Friends'
 
 function App() {
+  const [friends, setFriends] = useState([])
   return (
     <Router>
       <div className="App">
@@ -15,7 +16,7 @@ function App() {
           <Link to='/friends'>friends</Link>          
         </div> */}
         <Switch>
-        <PrivateRoute path="/friends" component={Friends} />
+        <PrivateRoute path="/friends" component={Friends} friends={friends} setFriends={setFriends} />
           <Route path='/' component={Login}/>
           <Route component={Login}/>
         </Switch>
